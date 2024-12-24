@@ -77,17 +77,20 @@ int main(int argc, char* argv[])
         // ranks[i] is voter's ith preference
         int ranks[candidate_count];
 
-        // Query for each rank
+        // Query for each rank until a valid vote is cast
         for (int j = 0; j < candidate_count; j++)
         {
             char name[50];
-            printf("Rank %d: ", j + 1);
-            scanf("%49s", name);
 
-            if (!vote(j, name, ranks))
-            {
-                printf("Invalid vote.\n");
-                return 3;
+            while (true) {
+                printf("Rank %d: ", j + 1);
+                scanf("%49s", name);
+
+                if (vote(j, name, ranks)) {
+                    break;
+                }
+
+                printf("Invalid Vote. Please Try Again.\n");
             }
         }
 
